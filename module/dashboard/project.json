@@ -1,0 +1,51 @@
+{
+  "name": "module-dashboard",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "module/dashboard/src",
+  "prefix": "lib",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "module/dashboard/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "module/dashboard/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "module/dashboard/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "module/dashboard/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "module/dashboard/**/*.ts",
+          "module/dashboard/**/*.html",
+          "module/dashboard/package.json"
+        ]
+      }
+    }
+  }
+}
